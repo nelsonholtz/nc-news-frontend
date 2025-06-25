@@ -1,5 +1,6 @@
 import "../css/articleCard.css";
 import { useState } from "react";
+import { LikesCounter } from "../components/VoteButtons";
 
 function ArticleCard({ article }) {
   const [showDetails, setShowDetails] = useState(false);
@@ -11,7 +12,7 @@ function ArticleCard({ article }) {
 
       <button
         onClick={() => setShowDetails(!showDetails)}
-        className="infomation-button"
+        className="information-button"
       >
         {showDetails ? "Hide Details" : "More Information"}
       </button>
@@ -24,8 +25,8 @@ function ArticleCard({ article }) {
         </div>
       )}
 
+      <LikesCounter articleID={article.article_id} />
       <p>Comments: {article.comment_count}</p>
-      <p>Votes: {article.votes}</p>
     </div>
   );
 }

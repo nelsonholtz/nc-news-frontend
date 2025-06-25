@@ -1,5 +1,6 @@
-import "../css/articleCard.css";
+import "../css/commentCard.css";
 import { useState } from "react";
+// import { CommentVotes } from "./VoteButtons";
 
 function CommentCard({ comment }) {
   return (
@@ -13,3 +14,7 @@ function CommentCard({ comment }) {
 }
 
 export default CommentCard;
+
+{
+  /* <CommentVotes commentID={comment.comment_id} /> */
+}

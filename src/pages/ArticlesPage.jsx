@@ -26,4 +26,6 @@ function ArticlesPage() {
   );
 }
 
+//Need to check why the body of information isnt coming to this page
+
 export default ArticlesPage;

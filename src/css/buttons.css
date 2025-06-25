@@ -1,0 +1,37 @@
+.LikeButton {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.LikeButton button {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 24px; /* Pill shape for modern look */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.LikeButton button:hover {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+.LikeButton button:active {
+  transform: scale(0.98);
+}
+
+.LikeButton p {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin: 0;
+  padding-left: 8px;
+}
