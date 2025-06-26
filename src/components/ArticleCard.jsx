@@ -1,6 +1,7 @@
 import "../css/articleCard.css";
 import { useState } from "react";
 import { LikesCounter } from "../components/VoteButtons";
+import AddCommentForm from "./AddCommentForm";
 
 function ArticleCard({ article }) {
   const [showDetails, setShowDetails] = useState(false);

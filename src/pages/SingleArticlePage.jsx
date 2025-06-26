@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getNCNewsArticleID, getNCNewsCommentsByID } from "../api";
 import ArticleCard from "../components/ArticleCard";
 import CommentCard from "../components/CommentCard";
+import AddCommentForm from "../components/AddCommentForm";
 import { useParams } from "react-router-dom";
 import "../css/articlePage.css";
 
@@ -34,10 +35,9 @@ function SingleArticlesPage() {
     <section className="articles-container">
       <h1>Articles</h1>
       {article && <ArticleCard article={article} />}
-      <h2> Comments </h2>
-      {comments.map((comment) => (
-        <CommentCard key={comment.comment_id} comment={comment} />
-      ))}
+
+      <h2> Add Comment </h2>
+      {article && <AddCommentForm articleID={Number(articleID)} />}
     </section>
   );
 }

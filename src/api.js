@@ -58,36 +58,46 @@ export function patchArticleVote(articleId, voteChange) {
   });
 }
 
-export function getCommentByID(commentID) {
-  return fetch(
-    `https://nc-news-r68d.onrender.com/api/comments/${commentID}`
-  ).then((res) => {
+export function patchCommentVote(commentID, voteChange) {
+  const body = JSON.stringify({ inc_votes: voteChange });
+
+  return fetch(`https://nc-news-r68d.onrender.com/api/comments/${commentID}`, {
+    method: "PATCH",
+    body,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
     if (!res.ok) {
       return Promise.reject({
         status: res.status,
-        msg: "Failed to fetch single comment",
+        msg: "Failed to update vote",
       });
     }
     return res.json();
   });
 }
 
-// export function patchCommentVote(commentID, voteChange) {
-//   const body = JSON.stringify({ inc_votes: voteChange });
+export function postComment(articleID, username, commentBody) {
+  const commentData = { username, body: commentBody };
+  console.log("Sending to API:", commentData);
 
-//   return fetch(`https://nc-news-r68d.onrender.com/api/comments/${commentID}`, {
-//     method: "PATCH",
-//     body,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   }).then((res) => {
-//     if (!res.ok) {
-//       return Promise.reject({
-//         status: res.status,
-//         msg: "Failed to update vote",
-//       });
-//     }
-//     return res.json();
-//   });
-// }
+  return fetch(
+    `https://nc-news-r68d.onrender.com/api/articles/${articleID}/comments`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commentData),
+    }
+  ).then((response) => {
+    if (!response.ok) {
+      return Promise.reject({
+        status: response.status,
+        msg: "Failed to post comment",
+      });
+    }
+    return response.json();
+  });
+}
