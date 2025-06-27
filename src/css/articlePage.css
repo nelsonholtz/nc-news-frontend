@@ -6,3 +6,12 @@
   min-height: 100vh;
   align-items: center;
 }
+
+.articles {
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+}

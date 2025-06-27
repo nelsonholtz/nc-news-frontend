@@ -1,12 +1,13 @@
 .LikeButton {
-  display: inline-flex;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   align-items: flex-start;
   gap: 4px;
 }
 
 .LikeButton button {
   padding: 8px 16px;
+  margin: 8px;
   background-color: transparent;
   color: #333;
   border: 1px solid #e0e0e0;
@@ -25,13 +26,8 @@
   border-color: #ccc;
 }
 
-.LikeButton button:active {
-  transform: scale(0.98);
-}
-
 .LikeButton p {
-  color: #ff4d4f;
-  font-size: 12px;
-  margin: 0;
+  font-size: 1rem;
+  margin: 8px;
   padding-left: 8px;
 }

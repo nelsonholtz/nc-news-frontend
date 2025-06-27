@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getNCNewsArticle } from "../api";
+import { getNCNewsArticle, getNCNewsCommentsByID } from "../api";
 import ArticleCard from "../components/ArticleCard";
 import "../css/articlePage.css";
 
@@ -18,7 +18,10 @@ function ArticlesPage() {
 
   return (
     <section className="articles-container">
-      <h1>Articles</h1>
+      <div>
+        <h1 className="articles">Articles</h1>
+      </div>
+
       {articles.map((article) => (
         <ArticleCard key={article.article_id} article={article} />
       ))}

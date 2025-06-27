@@ -101,3 +101,22 @@ export function postComment(articleID, username, commentBody) {
     return response.json();
   });
 }
+
+export function deleteCommentIdAPI(commentID) {
+  return fetch(`https://nc-news-r68d.onrender.com/api/comments/${commentID}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    if (!response.ok) {
+      return Promise.reject({
+        status: response.status,
+        msg: "Failed to delete comment",
+      });
+    }
+    return response.text().then((text) => {
+      return text ? JSON.parse(text) : {};
+    });
+  });
+}

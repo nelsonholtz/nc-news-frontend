@@ -2,6 +2,7 @@ import "../css/articleCard.css";
 import { useState } from "react";
 import { LikesCounter } from "../components/VoteButtons";
 import AddCommentForm from "./AddCommentForm";
+import { Link } from "react-router-dom";
 
 function ArticleCard({ article }) {
   const [showDetails, setShowDetails] = useState(false);
@@ -25,9 +26,13 @@ function ArticleCard({ article }) {
           <p>Date: {article.created_at}</p>
         </div>
       )}
-
       <LikesCounter articleID={article.article_id} />
-      <p>Comments: {article.comment_count}</p>
+
+      <Link to={`/articles/${article.article_id}`} className="article-link">
+        <button>
+          <p>Comments: {article.comment_count}</p>
+        </button>
+      </Link>
     </div>
   );
 }

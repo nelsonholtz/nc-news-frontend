@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import { getNCNewsCommentsByID, postComment } from "../api";
+import { deleteCommentIdAPI, getNCNewsCommentsByID, postComment } from "../api";
 import CommentCard from "./CommentCard";
+import "../css/addCommentForm.css";
 
 function AddCommentForm({ articleID }) {
-  const [comments, setComment] = useState([]);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
     getNCNewsCommentsByID(articleID).then((commentData) => {
-      console.log("API Response:", commentData);
-      setComment(commentData.comments);
+      setComments(commentData.comments);
     });
   }, [articleID]);
 
@@ -26,8 +26,8 @@ function AddCommentForm({ articleID }) {
     postComment(articleID, username, newComment)
       .then((newCommentFromApi) => {
         console.log("New comment:", newCommentFromApi);
-        setComment((currentComments) => [
-          newCommentFromApi,
+        setComments((currentComments) => [
+          newCommentFromApi.comment || newCommentFromApi,
           ...currentComments,
         ]);
         setNewComment("");
@@ -40,29 +40,43 @@ function AddCommentForm({ articleID }) {
       });
   };
 
+  const handleDeleteComment = (deleteCommentID) => {
+    setComments((currentComment) =>
+      currentComment.filter((comment) => comment.comment_id !== deleteCommentID)
+    );
+  };
+
   return (
-    <section>
-      <h2>Comment Adder</h2>
-      <form onSubmit={handleSubmit}>
+    <section className="comment-section">
+      <h2 className="comment-title">Comment Adder</h2>
+      <form onSubmit={handleSubmit} className="comment-form">
         <input
           type="text"
           placeholder="Enter your username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          className="comment-input"
         />
         <textarea
           placeholder="Write your comment here"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           required
+          className="comment-textarea"
         />
-        <button type="submit">Post Comment</button>
+        <button type="submit" className="comment-submit-btn">
+          Post Comment
+        </button>
       </form>
 
-      <ul>
+      <ul className="comment-list">
         {comments.map((comment) => (
-          <CommentCard key={comment.comment_id} comment={comment} />
+          <CommentCard
+            key={comment.comment_id}
+            comment={comment}
+            deleteComment={handleDeleteComment}
+          />
         ))}
       </ul>
     </section>
