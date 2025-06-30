@@ -16,9 +16,14 @@ function Header() {
           />
         </div>
 
-        <Link to="/articles" className="nav-button">
-          Article Page
-        </Link>
+        <div className="nav-buttons-container">
+          <Link to="/home" className="nav-button">
+            Home Page
+          </Link>
+          <Link to="/articles" className="nav-button">
+            Article Page
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -11,8 +11,8 @@
   background-color: transparent;
   color: #333;
   border: 1px solid #e0e0e0;
-  border-radius: 24px; /* Pill shape for modern look */
-  font-size: 14px;
+  border-radius: 24px;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -30,4 +30,29 @@
   font-size: 1rem;
   margin: 8px;
   padding-left: 8px;
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.delete-button {
+  padding: 12px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: auto;
+  min-width: 100px;
+}
+
+.delete-button:hover {
+  background-color: #ff5252;
 }

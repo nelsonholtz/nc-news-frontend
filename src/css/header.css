@@ -64,3 +64,10 @@
 .header-title {
   font-size: 2rem;
 }
+
+.nav-buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}

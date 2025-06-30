@@ -1,4 +1,5 @@
 import { deleteCommentIdAPI } from "../api";
+import "../css/buttons.css";
 
 const DeleteComment = ({ commentID, deleteComment }) => {
   const handleClick = () => {
@@ -12,7 +13,13 @@ const DeleteComment = ({ commentID, deleteComment }) => {
       });
   };
 
-  return <button onClick={handleClick}>Delete Comment</button>;
+  return (
+    <div className="delete-button-container">
+      <button className="delete-button" onClick={handleClick}>
+        Delete
+      </button>
+    </div>
+  );
 };
 
 export default DeleteComment;

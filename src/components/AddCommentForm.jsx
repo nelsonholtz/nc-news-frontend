@@ -48,7 +48,7 @@ function AddCommentForm({ articleID }) {
 
   return (
     <section className="comment-section">
-      <h2 className="comment-title">Comment Adder</h2>
+      <h2 className="comment-title">Comments</h2>
       <form onSubmit={handleSubmit} className="comment-form">
         <input
           type="text"
