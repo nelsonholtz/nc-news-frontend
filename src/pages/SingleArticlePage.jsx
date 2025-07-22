@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import "../css/articlePage.css";
 import "../css/loading.css";
 
-function SingleArticlesPage() {
+function SingleArticlesPage({ loggedInUser }) {
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { articleID } = useParams();
@@ -42,7 +42,12 @@ function SingleArticlesPage() {
       <h1 className="articles">Articles</h1>
       {article && <ArticleCard article={article} />}
 
-      {article && <AddCommentForm articleID={Number(articleID)} />}
+      {article && (
+        <AddCommentForm
+          articleID={Number(articleID)}
+          loggedInUser={loggedInUser}
+        />
+      )}
     </section>
   );
 }

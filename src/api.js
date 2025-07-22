@@ -120,3 +120,40 @@ export function deleteCommentIdAPI(commentID) {
     });
   });
 }
+
+export function fetchUserByUsername(username) {
+  return fetch(`https://nc-news-r68d.onrender.com/api/users/${username}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    if (!response.ok) {
+      return Promise.reject({
+        status: response.status,
+        msg: "User not found",
+      });
+    }
+    return response.json();
+  });
+}
+
+export function postNewUser(newUser) {
+  return fetch("https://nc-news-r68d.onrender.com/api/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUser),
+  }).then((response) => {
+    if (!response.ok) {
+      return response.json().then((err) => {
+        return Promise.reject({
+          status: response.status,
+          msg: err.msg || "Failed to create user",
+        });
+      });
+    }
+    return response.json();
+  });
+}

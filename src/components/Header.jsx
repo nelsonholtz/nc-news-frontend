@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import "../css/header.css";
 
-function Header() {
+function Header({ loggedInUser, setLoggedInUser }) {
+  const handleLogout = () => {
+    setLoggedInUser(null);
+    localStorage.removeItem("loggedInUser");
+  };
+
   return (
     <div className="header-box">
       <div className="header-content">
@@ -23,6 +28,20 @@ function Header() {
           <Link to="/articles" className="nav-button">
             Article Page
           </Link>
+
+          {!loggedInUser ? (
+            <Link to="/login" className="nav-button">
+              login
+            </Link>
+          ) : (
+            <div className="user-info">
+              <img src={loggedInUser.avatar_url} alt="avatar" />
+              <span>{loggedInUser.username}</span>
+              <button onClick={handleLogout} className="logout-button">
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

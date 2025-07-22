@@ -3,7 +3,7 @@ import { deleteCommentIdAPI, getNCNewsCommentsByID, postComment } from "../api";
 import CommentCard from "./CommentCard";
 import "../css/addCommentForm.css";
 
-function AddCommentForm({ articleID }) {
+function AddCommentForm({ articleID, loggedInUser }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [username, setUsername] = useState("");
@@ -15,23 +15,36 @@ function AddCommentForm({ articleID }) {
     });
   }, [articleID]);
 
+  useEffect(() => {
+    if (loggedInUser) {
+      setUsername(loggedInUser.username);
+    } else {
+      setUsername("");
+    }
+  }, [loggedInUser]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!username.trim() || !newComment.trim()) {
+    const userToUse = loggedInUser ? loggedInUser.username : username;
+
+    if (!username.trim() && !newComment.trim()) {
       setError("Please enter a username and a comment.");
       return;
     }
+    if (!newComment.trim()) {
+      setError("Please enter a comment");
+      return;
+    }
 
-    postComment(articleID, username, newComment)
+    postComment(articleID, userToUse, newComment)
       .then((newCommentFromApi) => {
-        console.log("New comment:", newCommentFromApi);
         setComments((currentComments) => [
           newCommentFromApi.comment || newCommentFromApi,
           ...currentComments,
         ]);
         setNewComment("");
-        setUsername("");
+        if (!loggedInUser) setUsername("");
         setError(null);
       })
       .catch((err) => {
@@ -49,15 +62,8 @@ function AddCommentForm({ articleID }) {
   return (
     <section className="comment-section">
       <h2 className="comment-title">Comments</h2>
+
       <form onSubmit={handleSubmit} className="comment-form">
-        <input
-          type="text"
-          placeholder="Enter your username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          className="comment-input"
-        />
         <textarea
           placeholder="Write your comment here"
           value={newComment}
@@ -76,6 +82,7 @@ function AddCommentForm({ articleID }) {
             key={comment.comment_id}
             comment={comment}
             deleteComment={handleDeleteComment}
+            loggedInUser={loggedInUser}
           />
         ))}
       </ul>
