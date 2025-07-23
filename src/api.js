@@ -157,3 +157,29 @@ export function postNewUser(newUser) {
     return response.json();
   });
 }
+
+export function getAllTopics() {
+  return fetch(`https://nc-news-r68d.onrender.com/api/topics`).then((res) => {
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        msg: "Failed to fetch topics",
+      });
+    }
+    return res.json();
+  });
+}
+
+export function fetchArticleByTopic(topic_slug) {
+  return fetch(
+    `https://nc-news-r68d.onrender.com/api/articles?topic=${topic_slug}`
+  ).then((response) => {
+    if (!response.ok) {
+      return Promise.reject({
+        status: response.status,
+        msg: "Failed to fetch articles by topic",
+      });
+    }
+    return response.json();
+  });
+}

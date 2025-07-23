@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../css/header.css";
+import TopicsSearch from "./TopicsSearch";
 
 function Header({ loggedInUser, setLoggedInUser }) {
   const handleLogout = () => {
@@ -28,6 +29,7 @@ function Header({ loggedInUser, setLoggedInUser }) {
           <Link to="/articles" className="nav-button">
             Article Page
           </Link>
+          <TopicsSearch />
 
           {!loggedInUser ? (
             <Link to="/login" className="nav-button">

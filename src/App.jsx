@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Header from "./components/Header";
 import ArticlesPage from "./pages/ArticlesPage";
 import SingleArticlePage from "./pages/SingleArticlePage";
 import HomePage from "./pages/HomePage";
 import LoginRegister from "./pages/LoginRegisterPage";
+import TopicArticlePage from "./pages/TopicsArticlesPage";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -34,6 +36,8 @@ function App() {
             path="/articles/:articleID"
             element={<SingleArticlePage loggedInUser={loggedInUser} />}
           />
+
+          <Route path="/topics/:topicSlug" element={<TopicArticlePage />} />
         </Routes>
       </main>
     </div>

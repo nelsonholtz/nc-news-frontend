@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
-import { getNCNewsArticle, getNCNewsArticleID } from "../api";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchArticleByTopic, getNCNewsArticleID } from "../api";
 import ArticleCard from "../components/ArticleCard";
 import "../css/articlePage.css";
 import "../css/loading.css";
 
-function ArticlesPage() {
+function TopicArticlePage() {
+  const { topicSlug } = useParams();
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
-    getNCNewsArticle()
+
+    fetchArticleByTopic(topicSlug)
       .then((data) => {
         const articleList = data.articles;
         return Promise.all(
@@ -25,15 +28,15 @@ function ArticlesPage() {
       })
       .catch((err) => {
         console.error("Error", err);
-        setError("Failed to load articles");
+        setError("Failed to load topic articles");
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [topicSlug]);
 
   if (isLoading) {
-    return <p className="loading-message">Loading articles...</p>;
+    return <p className="loading-message">Loading topic articles...</p>;
   }
 
   if (error) {
@@ -43,7 +46,7 @@ function ArticlesPage() {
   return (
     <section className="articles-container">
       <div>
-        <h1 className="articles">Articles</h1>
+        <h1 className="articles">Articles about: {topicSlug}</h1>
       </div>
 
       {articles.map((article) => (
@@ -53,4 +56,4 @@ function ArticlesPage() {
   );
 }
 
-export default ArticlesPage;
+export default TopicArticlePage;
