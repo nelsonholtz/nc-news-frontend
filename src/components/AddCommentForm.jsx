@@ -7,13 +7,16 @@ function AddCommentForm({ articleID, loggedInUser }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [username, setUsername] = useState("");
+  const [sortOrder, setSortOrder] = useState("desc"); // default to most votes
+  const [sortBy, setSortBy] = useState("votes"); // you could expand to other fields later
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getNCNewsCommentsByID(articleID).then((commentData) => {
+    getNCNewsCommentsByID(articleID, sortBy, sortOrder).then((commentData) => {
       setComments(commentData.comments);
     });
-  }, [articleID]);
+  }, [articleID, sortBy, sortOrder]);
 
   useEffect(() => {
     if (loggedInUser) {
@@ -62,6 +65,19 @@ function AddCommentForm({ articleID, loggedInUser }) {
   return (
     <section className="comment-section">
       <h2 className="comment-title">Comments</h2>
+
+      {/* <div>
+        <label>
+          Sort comments by votes:
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="desc">Most Votes</option>
+            <option value="asc">Least Votes</option>
+          </select>
+        </label>
+      </div> */}
 
       <form onSubmit={handleSubmit} className="comment-form">
         <textarea

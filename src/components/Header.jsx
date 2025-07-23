@@ -13,6 +13,7 @@ function Header({ loggedInUser, setLoggedInUser }) {
       <div className="header-content">
         <h1 className="header-title">NC News</h1>
 
+        <TopicsSearch />
         <div className="search-container">
           <input
             type="text"
@@ -29,7 +30,6 @@ function Header({ loggedInUser, setLoggedInUser }) {
           <Link to="/articles" className="nav-button">
             Article Page
           </Link>
-          <TopicsSearch />
 
           {!loggedInUser ? (
             <Link to="/login" className="nav-button">

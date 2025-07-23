@@ -1,5 +1,7 @@
-export function getNCNewsArticle() {
-  return fetch(`https://nc-news-r68d.onrender.com/api/articles`).then((res) => {
+export function getNCNewsArticle(sortBy = "create_at", order = "desc") {
+  return fetch(
+    `https://nc-news-r68d.onrender.com/api/articles?sort_by=${sortBy}&order=${order}`
+  ).then((res) => {
     if (!res.ok) {
       return Promise.reject({
         status: res.status,
@@ -24,9 +26,13 @@ export function getNCNewsArticleID(articleID) {
   });
 }
 
-export function getNCNewsCommentsByID(articleID) {
+export function getNCNewsCommentsByID(
+  articleID,
+  sortBy = "created_at",
+  order = "desc"
+) {
   return fetch(
-    `https://nc-news-r68d.onrender.com/api/articles/${articleID}/comments`
+    `https://nc-news-r68d.onrender.com/api/articles/${articleID}/comments?sort_by=${sortBy}&order=${order}`
   ).then((res) => {
     if (!res.ok) {
       return Promise.reject({

@@ -14,7 +14,7 @@ function SingleArticlesPage({ loggedInUser }) {
 
   useEffect(() => {
     if (!isNaN(Number(articleID))) {
-      setIsLoading(true);
+      setIsLoading(true); // Start loading
 
       Promise.all([
         getNCNewsArticleID(Number(articleID)),
