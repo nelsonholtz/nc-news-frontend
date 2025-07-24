@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { getNCNewsArticle, getNCNewsArticleID } from "../api";
 import ArticleCard from "../components/ArticleCard";
+import PostArticle from "../components/PostArticle";
 import "../css/articlePage.css";
 import "../css/loading.css";
 import { useSearchParams } from "react-router-dom";
 
-function ArticlesPage() {
+function ArticlesPage({ loggedInUser }) {
   const [articles, setArticles] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +15,13 @@ function ArticlesPage() {
   const sortBy = searchParams.get("sort_by") || "created_at";
   const order = searchParams.get("order") || "desc";
 
-  useEffect(() => {
+  const deleteArticle = (idToRemove) => {
+    setArticles((currArticles) =>
+      currArticles.filter((article) => article.article_id !== idToRemove)
+    );
+  };
+
+  const fetchArticles = () => {
     setIsLoading(true);
     getNCNewsArticle(sortBy, order)
       .then((data) => {
@@ -35,6 +42,10 @@ function ArticlesPage() {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchArticles();
   }, [sortBy, order]);
 
   if (isLoading) {
@@ -50,6 +61,8 @@ function ArticlesPage() {
       <div>
         <h1 className="articles">Articles</h1>
       </div>
+
+      <PostArticle loggedInUser={loggedInUser} onPostSuccess={fetchArticles} />
 
       <div className="sort-controls">
         <label>
@@ -81,7 +94,12 @@ function ArticlesPage() {
       </div>
 
       {articles.map((article) => (
-        <ArticleCard key={article.article_id} article={article} />
+        <ArticleCard
+          key={article.article_id}
+          article={article}
+          deleteArticle={deleteArticle}
+          loggedInUser={loggedInUser}
+        />
       ))}
     </section>
   );

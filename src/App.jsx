@@ -29,9 +29,17 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route
             path="/login"
-            element={<LoginRegister setLoggedInUser={setLoggedInUser} />}
+            element={
+              <LoginRegister
+                loggedInUser={loggedInUser}
+                setLoggedInUser={setLoggedInUser}
+              />
+            }
           />
-          <Route path="/articles" element={<ArticlesPage />} />
+          <Route
+            path="/articles"
+            element={<ArticlesPage loggedInUser={loggedInUser} />}
+          />
           <Route
             path="/articles/:articleID"
             element={<SingleArticlePage loggedInUser={loggedInUser} />}

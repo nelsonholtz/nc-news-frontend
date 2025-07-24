@@ -7,16 +7,18 @@ function AddCommentForm({ articleID, loggedInUser }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [username, setUsername] = useState("");
-  const [sortOrder, setSortOrder] = useState("desc"); // default to most votes
-  const [sortBy, setSortBy] = useState("votes"); // you could expand to other fields later
+  const [order, setOrder] = useState("desc");
+  const [sortBy, setSortBy] = useState("created_at");
 
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getNCNewsCommentsByID(articleID, sortBy, sortOrder).then((commentData) => {
+    console.log(`Fetching comments sorted by ${sortBy} ${order}`);
+    getNCNewsCommentsByID(articleID, sortBy, order).then((commentData) => {
+      console.log("Received comments:", commentData.comments);
       setComments(commentData.comments);
     });
-  }, [articleID, sortBy, sortOrder]);
+  }, [articleID, sortBy, order]);
 
   useEffect(() => {
     if (loggedInUser) {
@@ -66,18 +68,15 @@ function AddCommentForm({ articleID, loggedInUser }) {
     <section className="comment-section">
       <h2 className="comment-title">Comments</h2>
 
-      {/* <div>
+      <div>
         <label>
-          Sort comments by votes:
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
+          Sort votes:
+          <select value={order} onChange={(e) => setOrder(e.target.value)}>
             <option value="desc">Most Votes</option>
             <option value="asc">Least Votes</option>
           </select>
         </label>
-      </div> */}
+      </div>
 
       <form onSubmit={handleSubmit} className="comment-form">
         <textarea

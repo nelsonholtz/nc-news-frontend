@@ -1,4 +1,4 @@
-export function getNCNewsArticle(sortBy = "create_at", order = "desc") {
+export function getNCNewsArticle(sortBy = "created_at", order = "desc") {
   return fetch(
     `https://nc-news-r68d.onrender.com/api/articles?sort_by=${sortBy}&order=${order}`
   ).then((res) => {
@@ -108,6 +108,26 @@ export function postComment(articleID, username, commentBody) {
   });
 }
 
+export function postArticle(articleData) {
+  console.log("Sending to API:", articleData);
+
+  return fetch(`https://nc-news-r68d.onrender.com/api/articles`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(articleData),
+  }).then((response) => {
+    if (!response.ok) {
+      return Promise.reject({
+        status: response.status,
+        msg: "Failed to post article",
+      });
+    }
+    return response.json();
+  });
+}
+
 export function deleteCommentIdAPI(commentID) {
   return fetch(`https://nc-news-r68d.onrender.com/api/comments/${commentID}`, {
     method: "DELETE",
@@ -187,5 +207,24 @@ export function fetchArticleByTopic(topic_slug) {
       });
     }
     return response.json();
+  });
+}
+
+export function deleteArticleIdAPI(articleID) {
+  return fetch(`https://nc-news-r68d.onrender.com/api/articles/${articleID}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    if (!response.ok) {
+      return Promise.reject({
+        status: response.status,
+        msg: "Failed to delete article",
+      });
+    }
+    return response.text().then((text) => {
+      return text ? JSON.parse(text) : {};
+    });
   });
 }

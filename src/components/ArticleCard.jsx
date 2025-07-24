@@ -3,8 +3,9 @@ import { useState } from "react";
 import { LikesCounter } from "../components/VoteButtons";
 import AddCommentForm from "./AddCommentForm";
 import { Link } from "react-router-dom";
+import DeleteArticle from "./DeleteArticle";
 
-function ArticleCard({ article }) {
+function ArticleCard({ article, deleteArticle, loggedInUser }) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -33,6 +34,13 @@ function ArticleCard({ article }) {
           <p>Comments: {article.comment_count}</p>
         </button>
       </Link>
+
+      {loggedInUser && loggedInUser.username === article.author && (
+        <DeleteArticle
+          articleID={article.article_id}
+          deleteArticle={deleteArticle}
+        />
+      )}
     </div>
   );
 }
