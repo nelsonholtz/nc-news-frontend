@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { getAllTopics } from "../api";
+import "../css/header.css";
 
 function TopicsSearch() {
   const [topics, setTopics] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const inputRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,56 +21,87 @@ function TopicsSearch() {
   }, []);
 
   const filteredTopics = topics.filter((topic) =>
-    topic.slug.toLowerCase().includes(searchTerm.toLowerCase())
+    topic.slug.toLowerCase().includes(searchTerm.toLowerCase().trim())
   );
 
   const handleTopicClick = (slug) => {
     navigate(`/topics/${slug}`);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (filteredTopics.length > 0) {
+        navigate(`/topics/${filteredTopics[0].slug}`);
+        setShowSuggestions(false);
+      } else {
+        alert("No matching topic found.");
+      }
+    }
+  };
+
+  const handleBlur = (e) => {
+    setTimeout(() => {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(document.activeElement)
+      ) {
+        setShowSuggestions(false);
+      }
+    }, 100);
+  };
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+    setShowSuggestions(true);
+  };
+
   return (
     <div>
       <h2>Search Topics</h2>
-      <input
-        type="text"
-        placeholder="Search for a topic..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ padding: "8px", width: "300px", marginBottom: "10px" }}
-      />
+      <div
+        className="search-container"
+        style={{ position: "relative" }}
+        ref={inputRef}
+      >
+        <input
+          className="search-bar"
+          type="text"
+          placeholder="Search for a topic..."
+          value={searchTerm}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          onFocus={() => setShowSuggestions(true)}
+          onBlur={handleBlur}
+        />
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        {filteredTopics.map((topic) => (
-          <li
-            key={topic.slug}
-            onClick={() => handleTopicClick(topic.slug)}
+        {showSuggestions && searchTerm && filteredTopics.length > 0 && (
+          <ul
             style={{
-              cursor: "pointer",
-              padding: "6px 10px",
-              borderBottom: "1px solid #ccc",
-              maxWidth: "300px",
+              position: "absolute",
+              backgroundColor: "white",
+              border: "1px solid #ccc",
+              padding: 0,
+              margin: 0,
+              listStyle: "none",
+              width: "100%",
+              zIndex: 100,
             }}
           >
-            {topic.slug}
-          </li>
-        ))}
-        {filteredTopics.length === 0 && <li>No topics found.</li>}
-      </ul>
+            {filteredTopics.map((topic) => (
+              <li
+                key={topic.slug}
+                onClick={() => handleTopicClick(topic.slug)}
+                style={{ padding: "8px", cursor: "pointer" }}
+              >
+                {topic.slug}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
-
-  //   return (
-  //     <div>
-  //       <h2>Topics</h2>
-  //       <div>
-  //         {topics.map((topic) => (
-  //           <Link key={topic.slug} to={`/topic/${topic.slug}`}>
-  //             <button>{topic.slug}</button>
-  //           </Link>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
 }
 
 export default TopicsSearch;

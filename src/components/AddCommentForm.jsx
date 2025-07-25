@@ -70,10 +70,24 @@ function AddCommentForm({ articleID, loggedInUser }) {
 
       <div>
         <label>
-          Sort votes:
+          Sort by:
+          <select
+            onChange={(e) => {
+              const value = e.target.value;
+              setSortBy(value);
+              setOrder("desc"); // default order when sortBy changes
+            }}
+          >
+            <option value="created_at">Date</option>
+            <option value="votes">Votes</option>
+          </select>
+        </label>
+
+        <label>
+          Order:
           <select value={order} onChange={(e) => setOrder(e.target.value)}>
-            <option value="desc">Most Votes</option>
-            <option value="asc">Least Votes</option>
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
           </select>
         </label>
       </div>

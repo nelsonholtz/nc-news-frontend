@@ -14,14 +14,6 @@ function Header({ loggedInUser, setLoggedInUser }) {
         <h1 className="header-title">NC News</h1>
 
         <TopicsSearch />
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search articles... (work in progress)"
-            className="search-bar"
-            disabled
-          />
-        </div>
 
         <div className="nav-buttons-container">
           <Link to="/home" className="nav-button">
