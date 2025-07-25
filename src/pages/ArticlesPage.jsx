@@ -4,6 +4,7 @@ import ArticleCard from "../components/ArticleCard";
 import PostArticle from "../components/PostArticle";
 import "../css/articlePage.css";
 import "../css/loading.css";
+import "../css/buttons.css";
 import { useSearchParams } from "react-router-dom";
 
 function ArticlesPage({ loggedInUser }) {
@@ -48,6 +49,10 @@ function ArticlesPage({ loggedInUser }) {
     fetchArticles();
   }, [sortBy, order]);
 
+  const addNewArticle = (article) => {
+    setArticles((currentArticles) => [article, ...currentArticles]);
+  };
+
   if (isLoading) {
     return <p className="loading-message">Loading articles...</p>;
   }
@@ -62,12 +67,19 @@ function ArticlesPage({ loggedInUser }) {
         <h1 className="articles">Articles</h1>
       </div>
 
-      <PostArticle loggedInUser={loggedInUser} onPostSuccess={fetchArticles} />
+      <PostArticle
+        loggedInUser={loggedInUser}
+        onPostSuccess={fetchArticles}
+        onArticlePosted={addNewArticle}
+      />
 
-      <div className="sort-controls">
-        <label>
-          Sort by:
+      <div className="sort-container">
+        {" "}
+        {/* New parent container */}
+        <div className="sort-group">
+          <label className="sort-label">Sort by:</label>
           <select
+            className="sort-select"
             value={sortBy}
             onChange={(e) =>
               setSearchParams({ sort_by: e.target.value, order })
@@ -77,11 +89,11 @@ function ArticlesPage({ loggedInUser }) {
             <option value="votes">Votes</option>
             <option value="comment_count">Comments</option>
           </select>
-        </label>
-
-        <label>
-          order:
+        </div>
+        <div className="sort-group">
+          <label className="sort-label">Order:</label>
           <select
+            className="sort-select"
             value={order}
             onChange={(e) =>
               setSearchParams({ sort_by: sortBy, order: e.target.value })
@@ -90,7 +102,7 @@ function ArticlesPage({ loggedInUser }) {
             <option value="desc">Descending</option>
             <option value="asc">Ascending</option>
           </select>
-        </label>
+        </div>
       </div>
 
       {articles.map((article) => (

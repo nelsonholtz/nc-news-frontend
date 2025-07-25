@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { fetchUserByUsername, postNewUser } from "../api";
+import "../css/loggin.css";
 
 function LoginRegister({ loggedInUser, setLoggedInUser }) {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
-  // const [loggedInUser, setLoggedInUser] = useState(null);
   const [isRegistering, setIsRegistering] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -86,26 +86,28 @@ function LoginRegister({ loggedInUser, setLoggedInUser }) {
           style={{ width: "100px", borderRadius: "50%" }}
         />
         <br />
-        <button onClick={handleLogout}>Logout</button>
+        {/* <button onClick={handleLogout}>Logout</button> */}
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: "300px", margin: "auto" }}>
-      <h2>{isRegistering ? "Register" : "Login"}</h2>
+    <form onSubmit={handleSubmit} className="login-form">
+      <h2 className="form-title">{isRegistering ? "Register" : "Login"}</h2>
 
-      <label>Username:</label>
+      <label className="form-label">Username:</label>
       <input
         type="text"
+        className="form-input"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         required
       />
 
-      <label>Name:</label>
+      <label className="form-label">Name:</label>
       <input
         type="text"
+        className="form-input"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
@@ -113,9 +115,10 @@ function LoginRegister({ loggedInUser, setLoggedInUser }) {
 
       {isRegistering && (
         <>
-          <label>Avatar URL:</label>
+          <label className="form-label">Avatar URL:</label>
           <input
             type="text"
+            className="form-input"
             value={avatarUrl}
             onChange={(e) => setAvatarUrl(e.target.value)}
             placeholder="https://example.com/avatar.jpg"
@@ -123,12 +126,13 @@ function LoginRegister({ loggedInUser, setLoggedInUser }) {
         </>
       )}
 
-      <button type="submit" disabled={isLoading}>
+      <button type="submit" className="form-submit-button" disabled={isLoading}>
         {isLoading ? "Processing..." : isRegistering ? "Register" : "Login"}
       </button>
 
       <button
         type="button"
+        className="form-switch-button"
         onClick={() => {
           setIsRegistering((prev) => !prev);
           setError(null);
@@ -138,7 +142,7 @@ function LoginRegister({ loggedInUser, setLoggedInUser }) {
         {isRegistering ? "Switch to Login" : "Switch to Register"}
       </button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error-message">{error}</p>}
     </form>
   );
 }

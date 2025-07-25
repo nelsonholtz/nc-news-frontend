@@ -2,7 +2,8 @@ import { useState } from "react";
 import { postArticle } from "../api";
 import "../css/addCommentForm.css";
 
-function PostArticle({ loggedInUser }) {
+function PostArticle({ loggedInUser, onArticlePosted }) {
+  const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [topic, setTopic] = useState("");
@@ -19,7 +20,7 @@ function PostArticle({ loggedInUser }) {
     }
 
     const articleData = {
-      author: loggedInUser?.username, // this should be "test"
+      author: loggedInUser?.username,
       title: title.trim(),
       body: body.trim(),
       topic: topic.trim(),
@@ -27,8 +28,7 @@ function PostArticle({ loggedInUser }) {
     };
 
     console.log("Logged in as:", loggedInUser?.username);
-
-    console.log("Sending to API:", articleData); // log should show flat object with correct values
+    console.log("Sending to API:", articleData);
 
     postArticle(articleData)
       .then(({ article }) => {
@@ -38,6 +38,11 @@ function PostArticle({ loggedInUser }) {
         setTopic("");
         setArticleImgUrl("");
         setError(null);
+        setShowForm(false);
+
+        if (onArticlePosted) {
+          onArticlePosted(article);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -47,46 +52,54 @@ function PostArticle({ loggedInUser }) {
 
   return (
     <section className="comment-section">
-      <h2 className="comment-title">Create New Article</h2>
-
-      {error && <p className="error-message">{error}</p>}
-
-      <form onSubmit={handleSubmit} className="comment-form">
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          className="comment-textarea"
-        />
-        <textarea
-          placeholder="Article content"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          required
-          className="comment-textarea"
-        />
-        <input
-          type="text"
-          placeholder="Topic (e.g. coding)"
-          value={topic}
-          onChange={(e) => setTopic(e.target.value)}
-          required
-          className="comment-textarea"
-        />
-        <input
-          type="text"
-          placeholder="Image URL (optional)"
-          value={articleImgUrl}
-          onChange={(e) => setArticleImgUrl(e.target.value)}
-          className="comment-textarea"
-        />
-
-        <button type="submit" className="comment-submit-btn">
-          Post Article
+      {!showForm ? (
+        <button onClick={() => setShowForm(true)} className="create-post-btn">
+          Create a Post
         </button>
-      </form>
+      ) : (
+        <>
+          <h2 className="comment-title">Create New Article</h2>
+
+          {error && <p className="error-message">{error}</p>}
+
+          <form onSubmit={handleSubmit} className="comment-form">
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className="comment-input"
+            />
+            <textarea
+              placeholder="Article content"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              required
+              className="comment-textarea large-textarea"
+            />
+            <input
+              type="text"
+              placeholder="Topic (e.g. coding)"
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              required
+              className="comment-input"
+            />
+            <input
+              type="text"
+              placeholder="Image URL (optional)"
+              value={articleImgUrl}
+              onChange={(e) => setArticleImgUrl(e.target.value)}
+              className="comment-input"
+            />
+
+            <button type="submit" className="comment-submit-btn">
+              Post Article
+            </button>
+          </form>
+        </>
+      )}
 
       {postedArticle && (
         <div className="posted-article-confirmation">

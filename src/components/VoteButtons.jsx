@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { patchArticleVote, getNCNewsArticleID, patchCommentVote } from "../api";
 import "../css/buttons.css";
+import { FiThumbsUp } from "react-icons/fi";
+import { FiThumbsDown } from "react-icons/fi";
 
 export function LikesCounter({ articleID }) {
   const [likesCount, setLikesCount] = useState(0);
@@ -34,6 +36,7 @@ export function LikesCounter({ articleID }) {
           handleLike(1);
         }}
       >
+        <FiThumbsUp />
         Like
       </button>
       <button
@@ -41,7 +44,7 @@ export function LikesCounter({ articleID }) {
           handleLike(-1);
         }}
       >
-        Dislike
+        <FiThumbsDown /> Dislike
       </button>
       {error ? <p>{error}</p> : null}
 

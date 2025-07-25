@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { deleteCommentIdAPI, getNCNewsCommentsByID, postComment } from "../api";
 import CommentCard from "./CommentCard";
 import "../css/addCommentForm.css";
+import "../css/buttons.css";
 
 function AddCommentForm({ articleID, loggedInUser }) {
   const [comments, setComments] = useState([]);
@@ -68,28 +69,33 @@ function AddCommentForm({ articleID, loggedInUser }) {
     <section className="comment-section">
       <h2 className="comment-title">Comments</h2>
 
-      <div>
-        <label>
-          Sort by:
+      <div className="sort-controls">
+        <div className="sort-select-container">
+          <label className="sort-label">Sort by:</label>
           <select
+            className="sort-select"
             onChange={(e) => {
               const value = e.target.value;
               setSortBy(value);
-              setOrder("desc"); // default order when sortBy changes
+              setOrder("desc");
             }}
           >
             <option value="created_at">Date</option>
             <option value="votes">Votes</option>
           </select>
-        </label>
+        </div>
 
-        <label>
-          Order:
-          <select value={order} onChange={(e) => setOrder(e.target.value)}>
+        <div className="sort-select-container">
+          <label className="sort-label">Order:</label>
+          <select
+            className="sort-select"
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+          >
             <option value="desc">Descending</option>
             <option value="asc">Ascending</option>
           </select>
-        </label>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="comment-form">

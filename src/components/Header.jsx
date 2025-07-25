@@ -31,7 +31,7 @@ function Header({ loggedInUser, setLoggedInUser }) {
             <div className="user-info">
               <img src={loggedInUser.avatar_url} alt="avatar" />
               <span>{loggedInUser.username}</span>
-              <button onClick={handleLogout} className="logout-button">
+              <button onClick={handleLogout} className="nav-button">
                 Logout
               </button>
             </div>

@@ -67,3 +67,40 @@
   padding: 0;
   margin-top: 2rem;
 }
+
+.comment-input {
+  width: 60%;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+}
+
+.large-textarea {
+  min-height: 200px;
+  font-size: 1rem;
+}
+
+.create-post-btn {
+  padding: 10px 20px;
+  background-color: #10b981;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-post-btn:hover {
+  background-color: #059669;
+}
+
+.create-post-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #6ee7b7;
+}
+
+.create-post-btn:active {
+  transform: scale(0.97);
+}

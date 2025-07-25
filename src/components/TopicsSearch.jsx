@@ -58,7 +58,6 @@ function TopicsSearch() {
 
   return (
     <div>
-      <h2>Search Topics</h2>
       <div
         className="search-container"
         style={{ position: "relative" }}
