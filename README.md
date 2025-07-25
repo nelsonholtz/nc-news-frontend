@@ -1,12 +1,85 @@
-# React + Vite
+# 📰 NC News
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**NC News** is a social news platform where users can sign up, explore posts, join conversations, and share their own stories. Whether it’s breaking news or niche interests, the goal is to spark discussion and bring people together around the topics they care about. Built to encourage thoughtful interaction and community-driven content.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Links
 
-## Expanding the ESLint configuration
+- **Live Site:** [https://ncnewsnh.netlify.app](https://ncnewsnh.netlify.app)
+- **GitHub Repository:** [https://github.com/nelsonholtz/nc-news](https://github.com/nelsonholtz/nc-news)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+- 🧑‍💻 User authentication and login
+- 📰 Browse and read articles
+- ✍️ Post new articles
+- 💬 Comment on articles
+- 👍 Like / 👎 Dislike (vote) on articles and comments
+- 🔃 Sort articles by date or vote count
+- 📱 Responsive design for mobile and desktop
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- **React** – Component-based UI
+- **Vite** – Fast dev server and build tool
+- **react-router-dom** – Routing
+- **react-icons** – Icon library
+- **CSS** – Custom styling
+
+### Backend
+
+- Custom-built RESTful API
+  > (Created separately — not included in this repo)
+
+### Hosting
+
+- **Netlify** – Frontend deployment
+
+---
+
+## ⚙️ Getting Started
+
+### 📦 Install Dependencies
+
+```bash
+npm install
+```
+
+### 🚀 Run Locally
+
+```bash
+npm run dev
+```
+
+### 🏗️ Production Build
+
+```bash
+npm run build
+```
+
+### 🔍 Preview Build
+
+```bash
+npm run preview
+```
+
+---
+
+## 🔌 API Connection
+
+---
+
+## 👨‍💻 Author
+
+Built with ❤️ by **Nelson Holtz**
+
+- GitHub: [@nelsonholtz](https://github.com/nelsonholtz)
+
+---

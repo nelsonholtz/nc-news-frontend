@@ -2,11 +2,39 @@ import "../css/commentCard.css";
 import { CommentVotes } from "./VoteButtons";
 import DeleteComment from "./DeleteComment";
 import FormattedDate from "./FormattedDate";
+import { useState, useEffect } from "react";
+import { fetchUserByUsername } from "../api";
 
 function CommentCard({ comment, deleteComment, loggedInUser }) {
+  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!comment.author) return;
+
+    fetchUserByUsername(comment.author)
+      .then((data) => {
+        setAvatarUrl(data.user.avatar_url);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch avatar", err);
+        setError(err);
+      });
+  }, [comment.author]);
+
   return (
     <div className="comment-card">
-      <h2 className="comment-user">{comment.author}</h2>
+      <div className="comment-header">
+        {avatarUrl && (
+          <img
+            src={avatarUrl}
+            alt={`${comment.author}'s avatar`}
+            className="avatar"
+          />
+        )}
+        <h2 className="comment-user">{comment.author}</h2>
+      </div>
+
       <p>Comment: {comment.body}</p>
       <p>
         Created: <FormattedDate dateString={comment.created_at} />

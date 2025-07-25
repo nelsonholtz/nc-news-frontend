@@ -16,11 +16,14 @@ function Header({ loggedInUser, setLoggedInUser }) {
         <TopicsSearch />
 
         <div className="nav-buttons-container">
-          <Link to="/home" className="nav-button">
+          {/* <Link to="/home" className="nav-button">
             Home Page
-          </Link>
+          </Link> */}
           <Link to="/articles" className="nav-button">
-            Article Page
+            Articles
+          </Link>
+          <Link to="/post" className="nav-button">
+            + Create
           </Link>
 
           {!loggedInUser ? (

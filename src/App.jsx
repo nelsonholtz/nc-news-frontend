@@ -7,6 +7,7 @@ import SingleArticlePage from "./pages/SingleArticlePage";
 import HomePage from "./pages/HomePage";
 import LoginRegister from "./pages/LoginRegisterPage";
 import TopicArticlePage from "./pages/TopicsArticlesPage";
+import PostArticlePage from "./pages/PostArticlePage";
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -40,6 +41,12 @@ function App() {
             path="/articles"
             element={<ArticlesPage loggedInUser={loggedInUser} />}
           />
+
+          <Route
+            path="/post"
+            element={<PostArticlePage loggedInUser={loggedInUser} />}
+          />
+
           <Route
             path="/articles/:articleID"
             element={<SingleArticlePage loggedInUser={loggedInUser} />}

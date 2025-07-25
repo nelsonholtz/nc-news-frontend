@@ -67,15 +67,13 @@ function ArticlesPage({ loggedInUser }) {
         <h1 className="articles">Articles</h1>
       </div>
 
-      <PostArticle
+      {/* <PostArticle
         loggedInUser={loggedInUser}
         onPostSuccess={fetchArticles}
         onArticlePosted={addNewArticle}
-      />
+      /> */}
 
       <div className="sort-container">
-        {" "}
-        {/* New parent container */}
         <div className="sort-group">
           <label className="sort-label">Sort by:</label>
           <select

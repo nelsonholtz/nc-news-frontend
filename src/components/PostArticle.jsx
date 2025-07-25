@@ -104,15 +104,6 @@ function PostArticle({ loggedInUser, onArticlePosted }) {
       {postedArticle && (
         <div className="posted-article-confirmation">
           <h3>Article Posted!</h3>
-          <p>
-            <strong>Title:</strong> {postedArticle.title}
-          </p>
-          <p>
-            <strong>Topic:</strong> {postedArticle.topic}
-          </p>
-          <p>
-            <strong>By:</strong> {postedArticle.author}
-          </p>
         </div>
       )}
     </section>
