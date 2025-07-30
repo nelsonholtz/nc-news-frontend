@@ -73,3 +73,24 @@
   justify-content: center;
   width: 100%;
 }
+
+.user-info-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-username {
+  font-weight: 500;
+  color: #333;
+  margin-right: 5px;
+}

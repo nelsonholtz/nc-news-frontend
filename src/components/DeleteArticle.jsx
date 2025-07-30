@@ -14,11 +14,9 @@ const DeleteArticle = ({ articleID, deleteArticle }) => {
   };
 
   return (
-    <div className="delete-button-container">
-      <button className="delete-button" onClick={handleClick}>
-        Delete
-      </button>
-    </div>
+    <button className="delete-button" onClick={handleClick}>
+      Delete
+    </button>
   );
 };
 

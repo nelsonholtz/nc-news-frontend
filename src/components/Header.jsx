@@ -31,12 +31,17 @@ function Header({ loggedInUser, setLoggedInUser }) {
               login
             </Link>
           ) : (
-            <div className="user-info">
-              <img src={loggedInUser.avatar_url} alt="avatar" />
-              <span>{loggedInUser.username}</span>
+            <div className="user-info-container">
               <button onClick={handleLogout} className="nav-button">
                 Logout
               </button>
+              <img
+                src={loggedInUser.avatar_url}
+                alt="avatar"
+                className="user-avatar"
+              />
+
+              {/* <span className="user-username">{loggedInUser.username}</span> */}
             </div>
           )}
         </div>

@@ -1,26 +1,23 @@
-import "../css/articleCard.css";
 import { useState } from "react";
 import { LikesCounter } from "../components/VoteButtons";
-import AddCommentForm from "./AddCommentForm";
 import { Link } from "react-router-dom";
 import DeleteArticle from "./DeleteArticle";
 import FormattedDate from "./FormattedDate";
 import "../css/buttons.css";
+import "../css/articleCard.css";
 
 function ArticleCard({ article, deleteArticle, loggedInUser }) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <div className="article-card">
-      <h2 className="article-title">{article.title}</h2>
-      <img src={article.article_img_url} alt={article.title} />
-
-      <>
+      <div className="top-article-line">
+        <h2 className="article-title">{article.title}</h2>
         <button
           onClick={() => setShowDetails(!showDetails)}
           className="info-toggle-button"
         >
-          {showDetails ? "Hide Details" : "More Information"}
+          {showDetails ? "Hide Info" : "More Info"}
         </button>
 
         {showDetails && (
@@ -40,21 +37,35 @@ function ArticleCard({ article, deleteArticle, loggedInUser }) {
             </p>
           </div>
         )}
-      </>
-      <LikesCounter articleID={article.article_id} />
+      </div>
 
-      <Link to={`/articles/${article.article_id}`} className="article-link">
-        <button className="comment-button">
-          <span className="comment-count">{article.comment_count}</span>
-          <span className="comment-label">Comments</span>
-        </button>
-      </Link>
-      {loggedInUser && loggedInUser.username === article.author && (
-        <DeleteArticle
-          articleID={article.article_id}
-          deleteArticle={deleteArticle}
+      <Link
+        to={`/articles/${article.article_id}`}
+        className="article-image-link"
+      >
+        <img
+          src={article.article_img_url}
+          alt={article.title}
+          className="article-image"
         />
-      )}
+      </Link>
+      <>
+        <div className="article-line">
+          <LikesCounter articleID={article.article_id} />
+          <Link to={`/articles/${article.article_id}`} className="article-link">
+            <button className="comment-button">
+              <span className="comment-count">{article.comment_count}</span>
+              <span className="comment-label">Comments</span>
+            </button>
+          </Link>
+          {loggedInUser && loggedInUser.username === article.author && (
+            <DeleteArticle
+              articleID={article.article_id}
+              deleteArticle={deleteArticle}
+            />
+          )}
+        </div>
+      </>
     </div>
   );
 }

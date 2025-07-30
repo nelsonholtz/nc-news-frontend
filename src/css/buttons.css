@@ -40,17 +40,14 @@ button,
   padding-left: 8px;
 }
 
-.delete-button-container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  margin-top: 10px;
-}
-
 .delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #ff6b6b;
   color: white;
-  min-width: 100px;
+  width: 90px;
+  height: 35px;
   padding: 12px;
 }
 
@@ -133,6 +130,7 @@ button,
 
 .info-toggle-button {
   padding: 0.75rem 1.75rem;
+  width: 150px;
   background-color: #4a90e2;
   color: white;
   margin: 1rem 0;

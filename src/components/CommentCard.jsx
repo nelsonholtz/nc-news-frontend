@@ -1,9 +1,9 @@
-import "../css/commentCard.css";
 import { CommentVotes } from "./VoteButtons";
 import DeleteComment from "./DeleteComment";
 import FormattedDate from "./FormattedDate";
 import { useState, useEffect } from "react";
 import { fetchUserByUsername } from "../api";
+import "../css/commentCard.css";
 
 function CommentCard({ comment, deleteComment, loggedInUser }) {
   const [avatarUrl, setAvatarUrl] = useState(null);

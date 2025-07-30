@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { getNCNewsArticle, getNCNewsArticleID } from "../api";
+import { useSearchParams } from "react-router-dom";
 import ArticleCard from "../components/ArticleCard";
 import PostArticle from "../components/PostArticle";
 import "../css/articlePage.css";
 import "../css/loading.css";
 import "../css/buttons.css";
-import { useSearchParams } from "react-router-dom";
 
 function ArticlesPage({ loggedInUser }) {
   const [articles, setArticles] = useState([]);
@@ -63,17 +63,16 @@ function ArticlesPage({ loggedInUser }) {
 
   return (
     <section className="articles-container">
-      <div>
-        <h1 className="articles">Articles</h1>
-      </div>
+      <div></div>
 
       {/* <PostArticle
         loggedInUser={loggedInUser}
         onPostSuccess={fetchArticles}
         onArticlePosted={addNewArticle}
-      /> */}
+        /> */}
 
       <div className="sort-container">
+        <h1 className="articles">Articles</h1>
         <div className="sort-group">
           <label className="sort-label">Sort by:</label>
           <select

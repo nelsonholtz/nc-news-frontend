@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { postArticle } from "../api";
-import "../css/addCommentForm.css"; // Reuse your existing styles
+import "../css/addCommentForm.css";
 
 function PostArticlePage({ loggedInUser, onArticlePosted }) {
   const [title, setTitle] = useState("");

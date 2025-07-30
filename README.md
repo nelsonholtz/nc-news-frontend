@@ -78,7 +78,7 @@ npm run preview
 
 ## 👨‍💻 Author
 
-Built with ❤️ by **Nelson Holtz**
+This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/) by **Nelson Holtz**
 
 - GitHub: [@nelsonholtz](https://github.com/nelsonholtz)
 

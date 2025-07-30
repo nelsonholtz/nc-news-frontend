@@ -48,7 +48,7 @@ export function LikesCounter({ articleID }) {
       </button>
       {error ? <p>{error}</p> : null}
 
-      <p>Votes{likesCount}</p>
+      <p>Votes: {likesCount}</p>
     </div>
   );
 }
