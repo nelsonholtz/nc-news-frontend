@@ -129,15 +129,23 @@ button,
 }
 
 .info-toggle-button {
-  padding: 0.75rem 1.75rem;
-  width: 150px;
-  background-color: #4a90e2;
-  color: white;
+  color: #4a90e2;
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
   margin: 1rem 0;
+  width: auto;
+  font: inherit;
 }
 
 .info-toggle-button:hover {
-  background-color: #3a7bc8;
+  color: #3a7bc8;
+}
+
+.info-toggle-button:active {
+  color: #2a6bb4;
 }
 
 .article-details {

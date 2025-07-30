@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import "../css/articlePage.css";
 import "../css/loading.css";
 
-function SingleArticlesPage({ loggedInUser }) {
+function SingleArticlesPage({ deleteArticle, loggedInUser }) {
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { articleID } = useParams();
@@ -14,7 +14,7 @@ function SingleArticlesPage({ loggedInUser }) {
 
   useEffect(() => {
     if (!isNaN(Number(articleID))) {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
 
       Promise.all([
         getNCNewsArticleID(Number(articleID)),
@@ -40,7 +40,13 @@ function SingleArticlesPage({ loggedInUser }) {
   return (
     <section className="articles-container">
       <h1 className="articles">Articles</h1>
-      {article && <ArticleCard article={article} />}
+      {article && (
+        <ArticleCard
+          article={article}
+          deleteArticle={deleteArticle}
+          loggedInUser={loggedInUser}
+        />
+      )}
 
       {article && (
         <AddCommentForm

@@ -128,6 +128,26 @@ export function postArticle(articleData) {
   });
 }
 
+export function postTopics(topicData) {
+  console.log("Sending to API:", topicData);
+
+  return fetch(`https://nc-news-r68d.onrender.com/api/topics`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(topicData),
+  }).then((response) => {
+    if (!response.ok) {
+      return Promise.reject({
+        status: response.status,
+        msg: "Failed to post topic",
+      });
+    }
+    return response.json();
+  });
+}
+
 export function deleteCommentIdAPI(commentID) {
   return fetch(`https://nc-news-r68d.onrender.com/api/comments/${commentID}`, {
     method: "DELETE",
