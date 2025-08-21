@@ -10,13 +10,10 @@ function AddCommentForm({ articleID, loggedInUser }) {
   const [username, setUsername] = useState("");
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("created_at");
-
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log(`Fetching comments sorted by ${sortBy} ${order}`);
     getNCNewsCommentsByID(articleID, sortBy, order).then((commentData) => {
-      console.log("Received comments:", commentData.comments);
       setComments(commentData.comments);
     });
   }, [articleID, sortBy, order]);
@@ -32,25 +29,23 @@ function AddCommentForm({ articleID, loggedInUser }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const userToUse = loggedInUser ? loggedInUser.username : username;
-
-    if (!username.trim() && !newComment.trim()) {
-      setError("Please enter a username and a comment.");
+    if (!loggedInUser) {
+      setError(" You must be logged in to post a comment.");
       return;
     }
+
     if (!newComment.trim()) {
       setError("Please enter a comment");
       return;
     }
 
-    postComment(articleID, userToUse, newComment)
+    postComment(articleID, loggedInUser.username, newComment)
       .then((newCommentFromApi) => {
         setComments((currentComments) => [
           newCommentFromApi.comment || newCommentFromApi,
           ...currentComments,
         ]);
         setNewComment("");
-        if (!loggedInUser) setUsername("");
         setError(null);
       })
       .catch((err) => {
@@ -75,8 +70,7 @@ function AddCommentForm({ articleID, loggedInUser }) {
           <select
             className="sort-select"
             onChange={(e) => {
-              const value = e.target.value;
-              setSortBy(value);
+              setSortBy(e.target.value);
               setOrder("desc");
             }}
           >
@@ -99,11 +93,12 @@ function AddCommentForm({ articleID, loggedInUser }) {
       </div>
 
       <form onSubmit={handleSubmit} className="comment-form">
+        {error && <p className="error-message">{error}</p>}
+
         <textarea
           placeholder="Write your comment here"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
-          required
           className="comment-textarea"
         />
         <button type="submit" className="comment-submit-btn">

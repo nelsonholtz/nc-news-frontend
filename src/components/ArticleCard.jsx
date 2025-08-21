@@ -6,13 +6,19 @@ import FormattedDate from "./FormattedDate";
 import "../css/buttons.css";
 import "../css/articleCard.css";
 
-function ArticleCard({ article, deleteArticle, loggedInUser }) {
+function ArticleCard({
+  article,
+  deleteArticle,
+  loggedInUser,
+  hideTitle = false,
+}) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <div className="article-card">
       <div className="top-article-line">
-        <h2 className="article-title">{article.title}</h2>
+        {!hideTitle && <h2 className="article-title">{article.title}</h2>}
+
         <button
           onClick={() => setShowDetails(!showDetails)}
           className="info-toggle-button"

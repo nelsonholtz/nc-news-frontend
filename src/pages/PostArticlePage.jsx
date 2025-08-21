@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { postArticle, postTopics } from "../api";
 import "../css/addCommentForm.css";
+import "../css/errorMessage.css";
 
 function PostArticlePage({ loggedInUser, onArticlePosted }) {
   const [title, setTitle] = useState("");
@@ -16,6 +17,11 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
     e.preventDefault();
     setError(null);
 
+    if (!loggedInUser) {
+      setError(" You must be logged in to post an article.");
+      return;
+    }
+
     const trimmedTitle = title.trim();
     const trimmedBody = body.trim();
     const trimmedTopic = topic.trim();
@@ -28,7 +34,7 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
     }
 
     const articleData = {
-      author: loggedInUser?.username,
+      author: loggedInUser.username,
       title: trimmedTitle,
       body: trimmedBody,
       topic: trimmedTopic,
@@ -92,7 +98,6 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="comment-input"
-          required
         />
 
         <textarea
@@ -100,7 +105,6 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
           value={body}
           onChange={(e) => setBody(e.target.value)}
           className="comment-textarea large-textarea"
-          required
         />
 
         <label className="checkbox-label">
@@ -118,7 +122,6 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
           className="comment-input"
-          required
         />
 
         {useNewTopic && (

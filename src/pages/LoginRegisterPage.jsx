@@ -94,6 +94,11 @@ function LoginRegister({ loggedInUser, setLoggedInUser }) {
   return (
     <form onSubmit={handleSubmit} className="login-form">
       <h2 className="form-title">{isRegistering ? "Register" : "Login"}</h2>
+      <p className="form-subtext">
+        Dummy login: <br />
+        <strong>Username:</strong> test <br />
+        <strong>Name:</strong> test
+      </p>
 
       <label className="form-label">Username:</label>
       <input

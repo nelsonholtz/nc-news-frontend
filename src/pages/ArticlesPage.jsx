@@ -54,7 +54,20 @@ function ArticlesPage({ loggedInUser }) {
   };
 
   if (isLoading) {
-    return <p className="loading-message">Loading articles...</p>;
+    return (
+      <div className="loading-container">
+        <div className="loading-icon" aria-hidden="true">
+          📖
+        </div>
+        <p className="loading-message">
+          Loading articles<span className="loading-dots"></span>
+        </p>
+        <p className="loading-subtext">
+          Please wait a moment — it may take a couple of minutes to load
+          everything.
+        </p>
+      </div>
+    );
   }
 
   if (error) {
@@ -96,8 +109,8 @@ function ArticlesPage({ loggedInUser }) {
               setSearchParams({ sort_by: sortBy, order: e.target.value })
             }
           >
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
+            <option value="desc">Ascending</option>
+            <option value="asc">Descending</option>
           </select>
         </div>
       </div>

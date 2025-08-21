@@ -34,17 +34,30 @@ function SingleArticlesPage({ deleteArticle, loggedInUser }) {
   }, [articleID]);
 
   if (isLoading) {
-    return <p className="loading-message">Loading comments...</p>;
+    return (
+      <div className="loading-container">
+        <div className="loading-icon" aria-hidden="true">
+          📖
+        </div>
+        <p className="loading-message">
+          Loading comments<span className="loading-dots"></span>
+        </p>
+        <p className="loading-subtext">
+          Please wait a moment — it may take a couple of minutes to load
+          everything.
+        </p>
+      </div>
+    );
   }
-
   return (
     <section className="articles-container">
-      <h1 className="articles">Articles</h1>
+      <h1 className="articles">{article ? article.title : "Articles"}</h1>
       {article && (
         <ArticleCard
           article={article}
           deleteArticle={deleteArticle}
           loggedInUser={loggedInUser}
+          hideTitle={true}
         />
       )}
 

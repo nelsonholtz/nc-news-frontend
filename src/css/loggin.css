@@ -1,5 +1,5 @@
 .login-form {
-  max-width: 300px;
+  max-width: 325px;
   margin: auto;
   padding: 2rem;
   background-color: white;
@@ -67,4 +67,15 @@
   color: #ff3333;
   text-align: center;
   margin-top: 1rem;
+}
+
+.form-subtext {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.form-subtext ul {
+  margin: 0.3rem 0 0;
+  padding-left: 1.2rem;
 }
