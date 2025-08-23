@@ -87,7 +87,6 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
       {postedArticle && (
         <div className="posted-article-confirmation">
           <h3>Article Posted!</h3>
-          <p>Title: {postedArticle.title}</p>
         </div>
       )}
 

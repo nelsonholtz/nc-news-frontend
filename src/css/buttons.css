@@ -1,3 +1,4 @@
+/* Base button styles */
 button,
 .comment-button,
 .delete-button,
@@ -14,6 +15,7 @@ button,
   gap: 0.5rem;
 }
 
+/* Like Button */
 .LikeButton {
   display: flex;
   flex-direction: row;
@@ -37,30 +39,29 @@ button,
 .LikeButton p {
   font-size: 1rem;
   margin: 8px;
-  padding-left: 8px;
 }
 
+/* Delete Button */
 .delete-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ff6b6b;
+  background-color: #e74c3c;
   color: white;
-  width: 90px;
-  height: 35px;
-  padding: 12px;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  justify-content: center;
 }
 
 .delete-button:hover {
-  background-color: #ff5252;
+  background-color: #c0392b;
 }
 
+/* Sorting */
 .sort-container,
 .sort-controls {
   display: flex;
   gap: 1rem;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
 .sort-group,
@@ -96,10 +97,32 @@ button,
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
 }
 
+/* Articles */
 .article-link {
   text-decoration: none;
 }
 
+.article-details {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border: 1px solid #e1e8f0;
+}
+
+.detail-item {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #4a90e2;
+  margin-right: 0.5rem;
+}
+
+/* Comment Button */
 .comment-button {
   background-color: #f0f4f8;
   color: #4a90e2;
@@ -128,12 +151,11 @@ button,
   }
 }
 
+/* Info Toggle Button */
 .info-toggle-button {
   color: #4a90e2;
   text-decoration: underline;
-  cursor: pointer;
   background: none;
-  border: none;
   padding: 0;
   margin: 1rem 0;
   width: auto;
@@ -148,22 +170,92 @@ button,
   color: #2a6bb4;
 }
 
-.article-details {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  border: 1px solid #e1e8f0;
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-.detail-item {
-  margin-bottom: 0.75rem;
-  line-height: 1.6;
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 24px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeInScale 0.25s ease;
+}
+
+.modal-content p {
+  font-size: 15px;
   color: #333;
+  margin-bottom: 16px;
 }
 
-.detail-label {
-  font-weight: 600;
-  color: #4a90e2;
-  margin-right: 0.5rem;
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cancel-button,
+.confirm-button {
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.cancel-button {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+.cancel-button:hover {
+  background-color: #95a5a6;
+}
+
+.confirm-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.confirm-button:hover {
+  background-color: #c0392b;
+}
+
+/* Smooth entry animation */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.voteCount {
+  font-size: 1rem;
+  margin: 8px;
+  padding: 5.5px 16px;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 24px;
+  background-color: #fafafa;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

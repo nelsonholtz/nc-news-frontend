@@ -48,7 +48,7 @@ export function LikesCounter({ articleID }) {
       </button>
       {error ? <p>{error}</p> : null}
 
-      <p>Votes: {likesCount}</p>
+      <p className="voteCount">Votes: {likesCount}</p>
     </div>
   );
 }
@@ -76,7 +76,7 @@ export function CommentVotes({ commentID, initialVotes = 0 }) {
       <button onClick={() => handleVote(1)}>Like</button>
       <button onClick={() => handleVote(-1)}>Dislike</button>
       {error && <p>{error}</p>}
-      <p>Votes: {commentVotes}</p>
+      <p className="voteCount">Votes: {commentVotes}</p>
     </div>
   );
 }

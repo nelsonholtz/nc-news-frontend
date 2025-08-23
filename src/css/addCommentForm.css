@@ -1,11 +1,12 @@
 .comment-section {
-  max-width: 672px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
   padding: 24px;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(187, 97, 97, 0.1);
+  border: 1px solid #e0e0e0;
 }
 
 .comment-title {
@@ -16,9 +17,10 @@
 }
 
 .comment-form {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 25px;
 }
 
 .comment-input,
@@ -69,13 +71,13 @@
 }
 
 .comment-input {
-  width: 91.5%;
+  width: 96%;
   padding: 6px 12px;
   font-size: 0.95rem;
 }
 
 .large-textarea {
-  min-height: 200px;
+  min-height: 250px;
   font-size: 1rem;
 }
 
@@ -103,4 +105,31 @@
 
 .create-post-btn:active {
   transform: scale(0.97);
+}
+
+.comment-textarea {
+  width: 96%;
+  min-height: 120px;
+  border-radius: 6px;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  margin-bottom: 0.75rem;
+  resize: vertical;
+}
+
+.comment-submit-btn {
+  display: inline-block;
+  text-align: center;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.comment-submit-btn:hover {
+  background: #0056b3;
 }

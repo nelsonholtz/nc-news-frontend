@@ -39,16 +39,19 @@ function CommentCard({ comment, deleteComment, loggedInUser }) {
       <p>
         Created: <FormattedDate dateString={comment.created_at} />
       </p>
-      <CommentVotes
-        commentID={comment.comment_id}
-        initialVotes={comment.votes}
-      />
-      {loggedInUser && loggedInUser.username === comment.author && (
-        <DeleteComment
+
+      <div className="vote-and-delete">
+        <CommentVotes
           commentID={comment.comment_id}
-          deleteComment={deleteComment}
+          initialVotes={comment.votes}
         />
-      )}
+        {loggedInUser && loggedInUser.username === comment.author && (
+          <DeleteComment
+            commentID={comment.comment_id}
+            deleteComment={deleteComment}
+          />
+        )}
+      </div>
     </div>
   );
 }
