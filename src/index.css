@@ -31,3 +31,17 @@ h1 {
   outline: none;
   box-shadow: 0 0 0 2px #93c5fd;
 }
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: #f4f3fa; /* soft pale blue/grey background */
+}
+
+.scrollable-content {
+  position: relative;
+  z-index: 1; /* content above particles */
+}
