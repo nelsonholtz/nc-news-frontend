@@ -5,7 +5,6 @@ import ParticlesBg from "particles-bg";
 import Header from "./components/Header";
 import ArticlesPage from "./pages/ArticlesPage";
 import SingleArticlePage from "./pages/SingleArticlePage";
-import HomePage from "./pages/HomePage";
 import LoginRegister from "./pages/LoginRegisterPage";
 import TopicArticlePage from "./pages/TopicsArticlesPage";
 import PostArticlePage from "./pages/PostArticlePage";
@@ -24,20 +23,15 @@ function App() {
       <div
         id="particles-background"
         style={{
-          position: "fixed", // keeps it fixed on the screen
+          position: "fixed",
           top: 0,
           left: 0,
           width: "100%",
-          height: "100%", // full viewport
-          zIndex: 0, // behind content
+          height: "100%",
+          zIndex: 0,
         }}
       >
-        <ParticlesBg
-          type="cobweb"
-          bg={false} // false because the wrapper handles background
-          color="#99ccff"
-          num={120}
-        />
+        <ParticlesBg type="cobweb" bg={false} color="#99ccff" num={120} />
       </div>
 
       {/* Scrollable content above particles */}
@@ -51,7 +45,16 @@ function App() {
 
         <main>
           <Routes>
-            <Route path="/home" element={<HomePage />} />
+            {/* Make ArticlesPage the homepage */}
+            <Route
+              path="/"
+              element={<ArticlesPage loggedInUser={loggedInUser} />}
+            />
+            {/* Keep /articles as an alternative route */}
+            <Route
+              path="/articles"
+              element={<ArticlesPage loggedInUser={loggedInUser} />}
+            />
             <Route
               path="/login"
               element={
@@ -60,10 +63,6 @@ function App() {
                   setLoggedInUser={setLoggedInUser}
                 />
               }
-            />
-            <Route
-              path="/articles"
-              element={<ArticlesPage loggedInUser={loggedInUser} />}
             />
             <Route
               path="/post"

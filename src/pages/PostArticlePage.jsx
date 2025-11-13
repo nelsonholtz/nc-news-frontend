@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { postArticle, postTopics } from "../api";
-import "../css/addCommentForm.css";
-import "../css/errorMessage.css";
+import "../css/postArticlePage.css"; // new name to separate from comments CSS
 
 function PostArticlePage({ loggedInUser, onArticlePosted }) {
   const [title, setTitle] = useState("");
@@ -18,27 +17,29 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
     setError(null);
 
     if (!loggedInUser) {
-      setError(" You must be logged in to post an article.");
+      setError("You must be logged in to post an article.");
       return;
     }
 
-    const trimmedTitle = title.trim();
-    const trimmedBody = body.trim();
-    const trimmedTopic = topic.trim();
-    const trimmedImgUrl = articleImgUrl.trim();
-    const trimmedDesc = newTopicDesc.trim();
+    const trimmed = {
+      title: title.trim(),
+      body: body.trim(),
+      topic: topic.trim(),
+      img: articleImgUrl.trim(),
+      desc: newTopicDesc.trim(),
+    };
 
-    if (!trimmedTitle || !trimmedBody || !trimmedTopic) {
+    if (!trimmed.title || !trimmed.body || !trimmed.topic) {
       setError("All fields except image URL are required.");
       return;
     }
 
     const articleData = {
       author: loggedInUser.username,
-      title: trimmedTitle,
-      body: trimmedBody,
-      topic: trimmedTopic,
-      article_img_url: trimmedImgUrl || undefined,
+      title: trimmed.title,
+      body: trimmed.body,
+      topic: trimmed.topic,
+      article_img_url: trimmed.img || undefined,
     };
 
     const postTheArticle = () => {
@@ -53,57 +54,51 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
           setNewTopicDesc("");
           if (onArticlePosted) onArticlePosted(article);
         })
-        .catch((err) => {
-          console.error(err);
-          setError("Failed to post article. Please try again.");
-        });
+        .catch(() => setError("Failed to post article. Please try again."));
     };
 
     if (useNewTopic) {
-      if (!trimmedDesc) {
+      if (!trimmed.desc) {
         setError("New topic description is required.");
         return;
       }
 
-      postTopics({ slug: trimmedTopic, description: trimmedDesc })
-        .then(() => {
-          postTheArticle();
-        })
-        .catch((err) => {
-          console.error(err);
-          setError("Failed to create new topic. It might already exist.");
-        });
+      postTopics({ slug: trimmed.topic, description: trimmed.desc })
+        .then(postTheArticle)
+        .catch(() =>
+          setError("Failed to create new topic. It might already exist.")
+        );
     } else {
       postTheArticle();
     }
   };
 
   return (
-    <section className="comment-section">
-      <h2 className="comment-title">Create New Article</h2>
+    <section className="post-article-container">
+      <h2 className="post-article-title">Create New Article</h2>
 
       {error && <p className="error-message">{error}</p>}
 
       {postedArticle && (
-        <div className="posted-article-confirmation">
-          <h3>Article Posted!</h3>
+        <div className="posted-confirmation">
+          <h3>✅ Article Posted!</h3>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="comment-form">
+      <form onSubmit={handleSubmit} className="post-article-form">
         <input
           type="text"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="comment-input"
+          className="post-input"
         />
 
         <textarea
           placeholder="Article content"
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          className="comment-textarea large-textarea"
+          className="post-textarea"
         />
 
         <label className="checkbox-label">
@@ -120,7 +115,7 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
           placeholder={useNewTopic ? "New topic name" : "Topic (e.g. coding)"}
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="comment-input"
+          className="post-input"
         />
 
         {useNewTopic && (
@@ -129,7 +124,7 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
             placeholder="New topic description"
             value={newTopicDesc}
             onChange={(e) => setNewTopicDesc(e.target.value)}
-            className="comment-input"
+            className="post-input"
           />
         )}
 
@@ -138,11 +133,11 @@ function PostArticlePage({ loggedInUser, onArticlePosted }) {
           placeholder="Image URL (optional)"
           value={articleImgUrl}
           onChange={(e) => setArticleImgUrl(e.target.value)}
-          className="comment-input"
+          className="post-input"
         />
 
-        <button type="submit" className="comment-submit-btn">
-          Post Article
+        <button type="submit" className="post-submit-btn">
+          ✨ Post Article
         </button>
       </form>
     </section>

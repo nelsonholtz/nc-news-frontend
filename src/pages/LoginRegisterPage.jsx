@@ -78,77 +78,101 @@ function LoginRegister({ loggedInUser, setLoggedInUser }) {
 
   if (loggedInUser) {
     return (
-      <div style={{ textAlign: "center" }}>
-        <h2>Welcome, {loggedInUser.username}!</h2>
-        <img
-          src={loggedInUser.avatar_url}
-          alt="avatar"
-          style={{ width: "100px", borderRadius: "50%" }}
-        />
-        <br />
-        {/* <button onClick={handleLogout}>Logout</button> */}
+      <div className="page-container">
+        <div className="page-glass">
+          <div className="welcome-container">
+            <h2 className="welcome-title">Welcome, {loggedInUser.username}!</h2>
+            <img
+              src={loggedInUser.avatar_url}
+              alt="avatar"
+              className="welcome-avatar"
+            />
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <h2 className="form-title">{isRegistering ? "Register" : "Login"}</h2>
-      <p className="form-subtext">
-        Dummy login: <br />
-        <strong>Username:</strong> test <br />
-        <strong>Name:</strong> test
-      </p>
+    <div className="page-container">
+      <div className="page-glass">
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-header">
+            <h2 className="form-title">
+              {isRegistering ? "Register" : "Login"}
+            </h2>
+            <div className="form-underline"></div>
+          </div>
 
-      <label className="form-label">Username:</label>
-      <input
-        type="text"
-        className="form-input"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
+          <p className="form-subtext">
+            Dummy login: <br />
+            <strong>Username:</strong> test <br />
+            <strong>Name:</strong> test
+          </p>
 
-      <label className="form-label">Name:</label>
-      <input
-        type="text"
-        className="form-input"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
+          <div className="input-group">
+            <label className="form-label">Username:</label>
+            <input
+              type="text"
+              className="form-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
 
-      {isRegistering && (
-        <>
-          <label className="form-label">Avatar URL:</label>
-          <input
-            type="text"
-            className="form-input"
-            value={avatarUrl}
-            onChange={(e) => setAvatarUrl(e.target.value)}
-            placeholder="https://example.com/avatar.jpg"
-          />
-        </>
-      )}
+          <div className="input-group">
+            <label className="form-label">Name:</label>
+            <input
+              type="text"
+              className="form-input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
 
-      <button type="submit" className="form-submit-button" disabled={isLoading}>
-        {isLoading ? "Processing..." : isRegistering ? "Register" : "Login"}
-      </button>
+          {isRegistering && (
+            <div className="input-group">
+              <label className="form-label">Avatar URL:</label>
+              <input
+                type="text"
+                className="form-input"
+                value={avatarUrl}
+                onChange={(e) => setAvatarUrl(e.target.value)}
+                placeholder="https://example.com/avatar.jpg"
+              />
+            </div>
+          )}
 
-      <button
-        type="button"
-        className="form-switch-button"
-        onClick={() => {
-          setIsRegistering((prev) => !prev);
-          setError(null);
-          resetForm();
-        }}
-      >
-        {isRegistering ? "Switch to Login" : "Switch to Register"}
-      </button>
+          <button
+            type="submit"
+            className="form-submit-button"
+            disabled={isLoading}
+          >
+            {isLoading
+              ? "🔄 Processing..."
+              : isRegistering
+              ? "✨ Register"
+              : "🔐 Login"}
+          </button>
 
-      {error && <p className="error-message">{error}</p>}
-    </form>
+          <button
+            type="button"
+            className="form-switch-button"
+            onClick={() => {
+              setIsRegistering((prev) => !prev);
+              setError(null);
+              resetForm();
+            }}
+          >
+            {isRegistering ? "← Switch to Login" : "→ Switch to Register"}
+          </button>
+
+          {error && <p className="error-message">{error}</p>}
+        </form>
+      </div>
+    </div>
   );
 }
 

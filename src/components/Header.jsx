@@ -9,41 +9,44 @@ function Header({ loggedInUser, setLoggedInUser }) {
   };
 
   return (
-    <div className="header-box">
-      <div className="header-content">
-        <h1 className="header-title">NC News</h1>
-
-        <TopicsSearch />
-
-        <div className="nav-buttons-container">
-          {/* <Link to="/home" className="nav-button">
-            Home Page
-          </Link> */}
-          <Link to="/articles" className="nav-button">
-            Articles
-          </Link>
-          <Link to="/post" className="nav-button">
-            + Create
-          </Link>
-
-          {!loggedInUser ? (
-            <Link to="/login" className="nav-button">
-              login
+    <div className="header-container">
+      <div className="header-glass">
+        <div className="header-content">
+          <div className="brand-section">
+            <Link to="/" className="header-title-link">
+              <h1 className="header-title">NC News</h1>
+              <div className="brand-underline"></div>
             </Link>
-          ) : (
-            <div className="user-info-container">
-              <button onClick={handleLogout} className="nav-button">
-                Logout
-              </button>
-              <img
-                src={loggedInUser.avatar_url}
-                alt="avatar"
-                className="user-avatar"
-              />
+          </div>
 
-              {/* <span className="user-username">{loggedInUser.username}</span> */}
+          <div className="search-section">
+            <div className="search-container">
+              <TopicsSearch />
             </div>
-          )}
+          </div>
+
+          <div className="nav-section">
+            <nav className="nav-buttons-container">
+              <Link to="/" className="nav-button articles-btn">
+                📰 Articles
+              </Link>
+              <Link to="/post" className="nav-button create-btn">
+                ✨ Create
+              </Link>
+              {!loggedInUser ? (
+                <Link to="/login" className="nav-button login-btn">
+                  🔐 Login
+                </Link>
+              ) : (
+                <button
+                  onClick={handleLogout}
+                  className="nav-button logout-btn"
+                >
+                  🚪 Logout
+                </button>
+              )}
+            </nav>
+          </div>
         </div>
       </div>
     </div>

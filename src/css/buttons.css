@@ -1,61 +1,95 @@
-/* Base button styles */
+/* Base button styles - Updated with glass morphism */
 button,
 .comment-button,
 .delete-button,
-.info-toggle-button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 24px;
-  font-size: 1rem;
-  font-weight: 500;
+.info-toggle-button,
+.cancel-button,
+.confirm-button {
+  padding: 0.7rem 1.25rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2c3e50;
+  border: 1px solid rgba(221, 221, 221, 0.5);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+  text-decoration: none;
 }
 
-/* Like Button */
+button:hover:not(:disabled),
+.comment-button:hover:not(:disabled),
+.delete-button:hover:not(:disabled),
+.info-toggle-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+/* Like Button - Updated */
 .LikeButton {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 4px;
+  align-items: center;
+  gap: 8px;
 }
 
 .LikeButton button {
-  margin: 8px;
-  background-color: transparent;
-  color: #333;
-  border: 1px solid #e0e0e0;
-  padding: 8px 16px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2c3e50;
+  border: 1px solid rgba(221, 221, 221, 0.5);
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .LikeButton button:hover {
-  background-color: #f5f5f5;
-  border-color: #ccc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
 }
 
 .LikeButton p {
   font-size: 1rem;
-  margin: 8px;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  color: #2c3e50;
+  border: 1px solid rgba(221, 221, 221, 0.5);
+  border-radius: 20px;
+  background: rgba(248, 249, 250, 0.8);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Delete Button */
+/* Delete Button - Updated */
 .delete-button {
-  background-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.9);
   color: white;
-  border-radius: 6px;
-  padding: 8px 14px;
-  font-size: 14px;
+  border-radius: 20px;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.9rem;
   justify-content: center;
+  border: 1px solid rgba(231, 76, 60, 0.3);
 }
 
 .delete-button:hover {
-  background-color: #c0392b;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.2);
 }
 
-/* Sorting */
+/* Sorting - Updated */
 .sort-container,
 .sort-controls {
   display: flex;
@@ -68,33 +102,42 @@ button,
 .sort-select-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 20px;
+  border: 1px solid rgba(221, 221, 221, 0.3);
+  backdrop-filter: blur(5px);
 }
 
 .sort-label {
-  font-size: 1rem;
-  color: #555;
-  font-weight: 500;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .sort-select {
-  padding: 0.5rem 1.25rem;
-  border-radius: 24px;
-  border: 1px solid #ddd;
-  background-color: white;
-  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(221, 221, 221, 0.5);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
 .sort-select:hover {
-  border-color: #bbb;
+  border-color: rgba(102, 126, 234, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .sort-select:focus {
   outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
 }
 
 /* Articles */
@@ -103,11 +146,13 @@ button,
 }
 
 .article-details {
-  background-color: #f8f9fa;
-  border-radius: 8px;
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 16px;
   padding: 1.5rem;
   margin: 1rem 0;
-  border: 1px solid #e1e8f0;
+  border: 1px solid rgba(221, 221, 221, 0.3);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .detail-item {
@@ -118,19 +163,22 @@ button,
 
 .detail-label {
   font-weight: 600;
-  color: #4a90e2;
+  color: #667eea;
   margin-right: 0.5rem;
 }
 
-/* Comment Button */
+/* Comment Button - Updated */
 .comment-button {
-  background-color: #f0f4f8;
-  color: #4a90e2;
-  padding: 0.5rem 1.25rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #667eea;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid rgba(221, 221, 221, 0.5);
 }
 
 .comment-button:hover {
-  background-color: #e1e8f0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-color: rgba(102, 126, 234, 0.3);
 }
 
 .comment-count {
@@ -147,30 +195,31 @@ button,
   }
 
   .comment-button {
-    padding: 0.5rem 1.5rem;
+    padding: 0.7rem 1.5rem;
   }
 }
 
-/* Info Toggle Button */
+/* Info Toggle Button - Updated */
 .info-toggle-button {
-  color: #4a90e2;
-  text-decoration: underline;
-  background: none;
-  padding: 0;
+  color: #667eea;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.7rem 1.25rem;
   margin: 1rem 0;
   width: auto;
   font: inherit;
+  border: 1px solid rgba(221, 221, 221, 0.5);
+  border-radius: 20px;
 }
 
 .info-toggle-button:hover {
-  color: #3a7bc8;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.info-toggle-button:active {
-  color: #2a6bb4;
-}
-
-/* Modal */
+/* Modal - Updated */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -182,22 +231,26 @@ button,
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
 .modal-content {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px 24px;
-  width: 320px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 25px 30px;
+  width: 350px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   animation: fadeInScale 0.25s ease;
 }
 
 .modal-content p {
-  font-size: 15px;
-  color: #333;
-  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
 .modal-actions {
@@ -206,32 +259,32 @@ button,
   gap: 12px;
 }
 
-.cancel-button,
-.confirm-button {
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s ease;
-}
-
 .cancel-button {
-  background-color: #bdc3c7;
+  background: rgba(255, 255, 255, 0.9);
   color: #2c3e50;
+  border: 1px solid rgba(221, 221, 221, 0.5);
+  padding: 0.7rem 1.25rem;
+  border-radius: 20px;
 }
 
 .cancel-button:hover {
-  background-color: #95a5a6;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-color: rgba(102, 126, 234, 0.3);
 }
 
 .confirm-button {
-  background-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.9);
   color: white;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  padding: 0.7rem 1.25rem;
+  border-radius: 20px;
 }
 
 .confirm-button:hover {
-  background-color: #c0392b;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.2);
 }
 
 /* Smooth entry animation */
@@ -247,15 +300,37 @@ button,
 }
 
 .voteCount {
-  font-size: 1rem;
-  margin: 8px;
-  padding: 5.5px 16px;
-  color: #333;
-  border: 1px solid #e0e0e0;
-  border-radius: 24px;
-  background-color: #fafafa;
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  color: #2c3e50;
+  border: 1px solid rgba(221, 221, 221, 0.5);
+  border-radius: 20px;
+  background: rgba(248, 249, 250, 0.8);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   cursor: default;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
+}
+
+/* Disabled state */
+button:disabled,
+.comment-button:disabled {
+  background: rgba(204, 204, 204, 0.7);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  color: #999;
+}
+
+button:disabled:hover,
+.comment-button:disabled:hover {
+  background: rgba(204, 204, 204, 0.7);
+  transform: none;
+  box-shadow: none;
+  color: #999;
+  border-color: rgba(221, 221, 221, 0.5);
 }
